@@ -131,7 +131,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     @objc open var isDrawMarkersEnabled: Bool { return drawMarkers }
     
     /// The marker that is displayed when a value is clicked on the chart
-    @objc open var marker: IMarker?
+    @objc open var marker: [IMarker]?
     
     private var _interceptTouchEvents = false
     
@@ -582,7 +582,8 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     {
         // if there is no marker view or drawing marker is disabled
         guard
-            let marker = marker
+            let marker = marker,
+            !marker.isEmpty
             , isDrawMarkersEnabled &&
                 valuesToHighlight()
             else { return }
@@ -611,10 +612,10 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
             }
 
             // callbacks to update the content
-            marker.refreshContent(entry: e, highlight: highlight)
+            marker[i].refreshContent(entry: e, highlight: highlight)
             
             // draw the marker
-            marker.draw(context: context, point: pos)
+            marker[i].draw(context: context, point: pos)
         }
     }
     

@@ -237,10 +237,10 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
             }
             
             // callbacks to update the content
-            marker.refreshContent(entry: e, highlight: highlight)
+            marker[i].refreshContent(entry: e, highlight: highlight)
             
             // draw the marker
-            marker.draw(context: context, point: pos)
+            marker[i].draw(context: context, point: pos)
         }
     }
 }
